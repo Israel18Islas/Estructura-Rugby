@@ -2,20 +2,26 @@ package rugby;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.cert.PKIXRevocationChecker.Option;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 
 import deporte.AboutDialog;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.CardLayout;
 
 public class VentanaRugby extends JFrame {
@@ -48,6 +54,7 @@ public class VentanaRugby extends JFrame {
 		int x = (ancho/2) - (450/2); 
 		int y = (alto/2) - (300/2);
 		setBounds(x, y, 550, 420);
+		JDialog.setDefaultLookAndFeelDecorated(true); //Decora las ventanas interactivas
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -62,15 +69,6 @@ public class VentanaRugby extends JFrame {
 		JMenuItem mntmGuardar = new JMenuItem("Guardar");
 		mntmGuardar.setIcon(new ImageIcon(VentanaRugby.class.getResource("/img/lock.png")));
 		mnArchivo.add(mntmGuardar);
-		
-		JMenuItem mntmSalir = new JMenuItem("Salir");
-		mntmSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		mntmSalir.setIcon(new ImageIcon(VentanaRugby.class.getResource("/img/dislike.png")));
-		mnArchivo.add(mntmSalir);
 		
 		JMenu mnAyuda = new JMenu("Ayuda");
 		menuBar.add(mnAyuda);
@@ -92,6 +90,7 @@ public class VentanaRugby extends JFrame {
 				help.setVisible(true);
 			}
 		});
+		
 		mntmAyuda.setIcon(new ImageIcon(VentanaRugby.class.getResource("/img/help.png")));
 		mnAyuda.add(mntmAyuda);
 		contentPane = new JPanel();
@@ -123,6 +122,125 @@ public class VentanaRugby extends JFrame {
 				CardLayout c = (CardLayout) panelJuego.getLayout();
 				c.next(panelJuego);
 				c.show(panelJuego, "Cancha");
+			}
+		});
+		
+		/*Acciones*/
+		
+		btnPause.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(pnlCancha.isVisible()) {
+					
+				}else {
+					JOptionPane.showMessageDialog(contentPane, "No hay nada que pausar! ", "Pausar Juego", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
+		
+		mntmNuevo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CardLayout c = (CardLayout) panelJuego.getLayout();
+				int reply;
+				String partida;
+				if(pnlCancha.isVisible()) {
+					reply = JOptionPane.showConfirmDialog(contentPane, "Deseas guardar la partida?", "Guardar Partida", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+						if(reply == JOptionPane.YES_OPTION){	//Valida que si guardas la partida, le asignes un nombre
+							partida = JOptionPane.showInputDialog(contentPane, "Nombre de la partida: ", "Guardar Partida", JOptionPane.QUESTION_MESSAGE);
+								if(partida == null) {	//Valida que si cancelas, la partida no se guarda
+									c.next(panelJuego);
+									c.show(panelJuego, "Cancha");
+								}
+								else if(partida.equals("")) {
+									JOptionPane.showMessageDialog(contentPane, "No has introducido un nombre. \nNo se puede guardar la partida!", "ERROR", JOptionPane.ERROR_MESSAGE);
+									c.next(panelJuego);
+									c.show(panelJuego, "Cancha");
+								}
+								else {
+									JOptionPane.showMessageDialog(contentPane, "Tu partida se ha guardado correctamente! ");
+									c.next(panelJuego);
+									c.show(panelJuego, "Silbato");
+								}
+						}
+						else if(reply == JOptionPane.NO_OPTION) {
+							c.next(panelJuego);
+							c.show(panelJuego, "Silbato");
+						}
+						else if(reply == JOptionPane.CANCEL_OPTION) {
+							
+						}
+						else if(reply == JOptionPane.CLOSED_OPTION) {
+							
+						}
+					//Validar las opciones
+				}else
+					JOptionPane.showMessageDialog(contentPane, "No has empezado a jugar!");
+			}
+		});
+		
+		mntmGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CardLayout c = (CardLayout) panelJuego.getLayout();
+				String partida;
+				if(pnlCancha.isVisible()) {
+					partida = JOptionPane.showInputDialog(contentPane, "Nombre de la partida: ", "Guardar Partida", JOptionPane.QUESTION_MESSAGE);
+					if(partida == null) {	//Valida que si cancelas, la partida no se guarda
+						c.next(panelJuego);
+						c.show(panelJuego, "Cancha");
+					}
+					else if(partida.equals("")) {
+						JOptionPane.showMessageDialog(contentPane, "No has introducido un nombre. \nNo se puede guardar la partida!", "ERROR", JOptionPane.ERROR_MESSAGE);
+						c.next(panelJuego);
+						c.show(panelJuego, "Cancha");
+					}
+					else {
+						JOptionPane.showMessageDialog(contentPane, "Tu partida se ha guardado correctamente! ");
+					}
+					/* Guardar la partida en un archivo*/
+				}else
+					JOptionPane.showMessageDialog(contentPane, "No has iniciado un partido!");
+			}
+		});
+		
+		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mntmSalir.setIcon(new ImageIcon(VentanaRugby.class.getResource("/img/dislike.png")));
+		mnArchivo.add(mntmSalir);
+		mntmSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CardLayout c = (CardLayout) panelJuego.getLayout();
+				int reply;
+				String partida;
+				if(pnlCancha.isVisible()) {
+					reply = JOptionPane.showConfirmDialog(contentPane, "Deseas guardar la partida?", "Guardar Partida", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+						if(reply == JOptionPane.YES_OPTION){	//Valida que si guardas la partida, le asignes un nombre
+							partida = JOptionPane.showInputDialog(contentPane, "Nombre de la partida: ", "Guardar Partida", JOptionPane.QUESTION_MESSAGE);
+								if(partida == null) {	//Valida que si cancelas, la partida no se guarda
+									c.next(panelJuego);
+									c.show(panelJuego, "Cancha");
+								}
+								else if(partida.equals("")) {
+									JOptionPane.showMessageDialog(contentPane, "No has introducido un nombre. \nNo se puede guardar la partida!", "ERROR", JOptionPane.ERROR_MESSAGE);
+									c.next(panelJuego);
+									c.show(panelJuego, "Cancha");
+								}
+								else {
+									JOptionPane.showMessageDialog(contentPane, "Tu partida se ha guardado correctamente! ");
+									System.exit(0);
+								}
+						}
+						else if(reply == JOptionPane.NO_OPTION) {
+							System.exit(0);
+						}
+						else if(reply == JOptionPane.CANCEL_OPTION) {
+							
+						}
+						else if(reply == JOptionPane.CLOSED_OPTION) {
+							
+						}
+					//Validar las opciones
+			}
+				else {	//Si esta en la primer pantalla, se termina de todos modos
+					System.exit(0);
+				}
 			}
 		});
 	}
