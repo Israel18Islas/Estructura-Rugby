@@ -65,10 +65,32 @@ public class Ayuda extends JDialog {
 			contentPanel.add(lblReglas);
 		}
 		{
-			JLabel lblHkjhkjjkshjkdhsk = new JLabel("Cada Jugador debe hacer anotaciones");
-			lblHkjhkjjkshjkdhsk.setIcon(new ImageIcon(Ayuda.class.getResource("/com/sun/javafx/scene/web/skin/Redo_16x16_JFX.png")));
-			lblHkjhkjjkshjkdhsk.setAlignmentX(Component.CENTER_ALIGNMENT);
-			contentPanel.add(lblHkjhkjjkshjkdhsk);
+			JLabel label = new JLabel("     ");
+			contentPanel.add(label);
+		}
+		{
+			JLabel lblRegla1 = new JLabel("El Jugador derribado debe soltar el balon inmediatamente.");
+			lblRegla1.setAlignmentX(Component.CENTER_ALIGNMENT);
+			lblRegla1.setIcon(new ImageIcon(Ayuda.class.getResource("/com/sun/javafx/scene/web/skin/Redo_16x16_JFX.png")));
+			contentPanel.add(lblRegla1);
+		}
+		{
+			JLabel lblNewLabel = new JLabel("No se permite pasar el balon hacia adelante.");
+			lblNewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			lblNewLabel.setIcon(new ImageIcon(Ayuda.class.getResource("/com/sun/javafx/scene/web/skin/Redo_16x16_JFX.png")));
+			contentPanel.add(lblNewLabel);
+		}
+		{
+			JLabel lblNewLabel_1 = new JLabel("Cualquier jugador puede taclear al oponente que tenga el balon.");
+			lblNewLabel_1.setIcon(new ImageIcon(Ayuda.class.getResource("/com/sun/javafx/scene/web/skin/Redo_16x16_JFX.png")));
+			lblNewLabel_1.setAlignmentX(Component.CENTER_ALIGNMENT);
+			contentPanel.add(lblNewLabel_1);
+		}
+		{
+			JLabel lblCualquierJugadorPuede = new JLabel("Cualquier jugador puede arrojar o patear el balon.");
+			lblCualquierJugadorPuede.setAlignmentX(Component.CENTER_ALIGNMENT);
+			lblCualquierJugadorPuede.setIcon(new ImageIcon(Ayuda.class.getResource("/com/sun/javafx/scene/web/skin/Redo_16x16_JFX.png")));
+			contentPanel.add(lblCualquierJugadorPuede);
 		}
 		{
 			JPanel buttonPane = new JPanel();
