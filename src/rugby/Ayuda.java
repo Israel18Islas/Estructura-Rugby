@@ -1,6 +1,7 @@
 package rugby;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -28,6 +29,7 @@ public class Ayuda extends JDialog {
 			Ayuda dialog = new Ayuda();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			dialog.setAlwaysOnTop(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -102,6 +104,7 @@ public class Ayuda extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						setVisible(false);
 						dispose();
+						
 					}
 				});
 				okButton.setActionCommand("OK");

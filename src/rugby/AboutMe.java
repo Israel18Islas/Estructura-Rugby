@@ -15,6 +15,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridLayout;
+import java.awt.Color;
 
 public class AboutMe extends JDialog {
 
@@ -43,6 +44,7 @@ public class AboutMe extends JDialog {
 		int y = (alto/2) - (300/2);
 		setBounds(x, y, 550, 400);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
@@ -60,6 +62,7 @@ public class AboutMe extends JDialog {
 		}
 		{
 			JPanel panelDatos = new JPanel();
+			panelDatos.setBackground(new Color(255, 255, 255));
 			contentPanel.add(panelDatos, BorderLayout.CENTER);
 			panelDatos.setLayout(new BoxLayout(panelDatos, BoxLayout.Y_AXIS));
 			{
@@ -94,6 +97,7 @@ public class AboutMe extends JDialog {
 		}
 		{
 			JPanel panelAuxiliar = new JPanel();
+			panelAuxiliar.setBackground(new Color(255, 255, 255));
 			contentPanel.add(panelAuxiliar, BorderLayout.WEST);
 			panelAuxiliar.setLayout(new BoxLayout(panelAuxiliar, BoxLayout.Y_AXIS));
 			{
@@ -104,10 +108,12 @@ public class AboutMe extends JDialog {
 		}
 		{
 			JPanel panel = new JPanel();
+			panel.setBackground(new Color(255, 255, 255));
 			contentPanel.add(panel, BorderLayout.SOUTH);
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(255, 255, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
